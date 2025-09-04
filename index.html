@@ -5,23 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Saloni ❤️</title>
   <style>
+    :root {
+      --brand: #d6336c;
+      --brand-dark: #b52d59;
+      --bg1: #ffdde1;
+      --bg2: #ee9ca7;
+    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
       color: #333;
       overflow-x: hidden;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-      text-align: center;
-    }
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       margin-bottom: 20px;
-      color: #d6336c;
+      color: var(--brand);
       animation: fadeIn 2s ease-in-out;
     }
     p {
@@ -34,31 +35,28 @@
     .page {
       display: none;
       min-height: 100vh;
-      padding: 40px 20px;
+      padding: 60px 20px;
+      text-align: center;
       animation: fadeIn 1s ease-in-out;
     }
-    .page.active {
-      display: block;
-    }
+    .page.active { display: block; }
     .nav-btn {
-      background: #d6336c;
+      background: var(--brand);
       color: white;
       border: none;
       padding: 12px 24px;
       font-size: 1rem;
       border-radius: 25px;
-      margin-top: 20px;
+      margin-top: 30px;
       cursor: pointer;
       transition: 0.3s;
     }
-    .nav-btn:hover {
-      background: #b52d59;
-    }
+    .nav-btn:hover { background: var(--brand-dark); }
     .game-area {
       position: relative;
       width: 100%;
       height: 400px;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.8);
       border-radius: 20px;
       overflow: hidden;
     }
@@ -72,17 +70,12 @@
       from { transform: translateY(100%); opacity: 0; }
       to { transform: translateY(-120%); opacity: 1; }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
     .score {
       font-size: 1.5rem;
       margin: 20px 0;
-      color: #d6336c;
+      color: var(--brand);
     }
     .music-btn {
       position: fixed;
@@ -96,6 +89,25 @@
       cursor: pointer;
       font-size: 1.2rem;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+    .confetti {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .confetti span {
+      position: absolute;
+      display: block;
+      width: 10px; height: 10px;
+      background: red;
+      animation: fall 4s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
   </style>
 </head>
@@ -106,31 +118,25 @@
   </audio>
 
   <div class="container">
-    <!-- Pages (Apology + Game + Final) -->
-    <div class="page active" id="page1">
-      <h1>Dear Saloni ❤️</h1>
-      <p style="animation-delay:0.3s">Mujhe maaf kar do… shayad kabhi kabhi main tumhe hurt kar deta hoon.</p>
-      <p style="animation-delay:0.6s">Tum meri duniya ho, aur main tumhe khona nahi chahta.</p>
-      <button class="nav-btn" onclick="nextPage()">Next ➡️</button>
-    </div>
-
-    <!-- Multiple apology pages -->
-    <div class="page" id="page2"><h1>For You 💌</h1><p>Main jaanta hoon galtiyan hoti hain, par mera dil sirf tumhare liye dhadakta hai.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page3"><h1>Promise 🤞</h1><p>Main hamesha tumhe respect aur pyaar dunga, chahe kuch bhi ho jaye.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page4"><h1>Sorry 🙏</h1><p>Har ek takraar ke baad mujhe samajh aata hai tum meri life ki sabse badi zaroorat ho.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page5"><h1>Game Time 🎮</h1>
-      <p>15 hearts pakdo aur mera dil jeet lo ❤️</p>
-      <div class="score" id="score">Score: 0 / 15</div>
-      <div class="game-area" id="gameArea"></div>
-    </div>
-
-    <!-- Final page after game -->
-    <div class="page" id="finalPage">
-      <h1>Saloni ❤️</h1>
-      <p>Tum meri life ki sabse pyari cheez ho. Main hamesha tumhare saath rahna chahta hoon.</p>
-      <p>Will you forgive me? 🌹</p>
-    </div>
+    <!-- Pages -->
+    <div class="page active" id="page1"><h1>Dear Saloni ❤️</h1><p>Shayad kabhi kabhi main tumhe hurt kar deta hoon, aur mujhe is baat ka bahut afsos hai.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page2"><h1>Sorry 🙏</h1><p>Tum meri duniya ho, aur main tumhe khona nahi chahta.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page3"><h1>Promise 🤞</h1><p>Main hamesha tumhe izzat aur pyaar dunga, chahe kuch bhi ho jaye.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page4"><h1>Tum meri Muskaan ho 😊</h1><p>Tumhari ek smile mere din ko roshan kar deti hai.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page5"><h1>My Best Friend 💕</h1><p>Tum sirf meri love nahi, meri best dost bhi ho.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page6"><h1>Support 🌸</h1><p>Har mushkil waqt mein tum meri strength bani ho.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page7"><h1>Care 💖</h1><p>Main tumhe hamesha care karunga, chahe main kitna bhi busy rahu.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page8"><h1>Dreams ✨</h1><p>Main chahta hoon hum ek saath apne saare sapne poore karein.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page9"><h1>Future 🏡</h1><p>Main apna future tumhare bina soch bhi nahi sakta.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page10"><h1>Tum meri Duniya ho 🌍</h1><p>Tum meri life ki sabse important insaan ho.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page11"><h1>Smile 🌹</h1><p>Main tumhe hamesha khush rakhna chahta hoon.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page12"><h1>Meri Khushi 🌟</h1><p>Meri sabse badi khushi tum ho, Saloni.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page13"><h1>Forgive Me 🥺</h1><p>Mujhe maaf kar do, galtiyan meri thi, par dil sirf tumhara hai.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+    <div class="page" id="page14"><h1>Game Time 🎮</h1><p>15 hearts pakdo aur mera dil jeet lo ❤️</p><div class="score" id="score">Score: 0 / 15</div><div class="game-area" id="gameArea"></div></div>
+    <div class="page" id="page15"><h1>Saloni ❤️</h1><p>Tum meri life ki sabse pyari cheez ho. Main hamesha tumhare saath rahna chahta hoon.</p><p>Will you forgive me? 🌹</p></div>
   </div>
+
+  <div class="confetti" id="confetti"></div>
 
   <script>
     let currentPage = 1;
@@ -138,7 +144,7 @@
       document.getElementById("page"+currentPage).classList.remove("active");
       currentPage++;
       document.getElementById("page"+currentPage).classList.add("active");
-      if (currentPage === 5) startGame();
+      if (currentPage === 14) startGame();
     }
 
     // Game logic
@@ -163,8 +169,9 @@
         document.getElementById("score").innerText = "Score: " + score + " / 15";
         heart.remove();
         if (score >= 15) {
-          document.getElementById("page5").classList.remove("active");
-          document.getElementById("finalPage").classList.add("active");
+          document.getElementById("page14").classList.remove("active");
+          document.getElementById("page15").classList.add("active");
+          launchConfetti();
         }
       });
 
@@ -191,6 +198,19 @@
       }
       isPlaying = !isPlaying;
     });
+
+    // Confetti
+    function launchConfetti() {
+      const confetti = document.getElementById("confetti");
+      for (let i=0; i<100; i++) {
+        const span = document.createElement("span");
+        span.style.left = Math.random()*100 + "vw";
+        span.style.background = `hsl(${Math.random()*360}, 70%, 60%)`;
+        span.style.animationDuration = (2+Math.random()*3) + "s";
+        confetti.appendChild(span);
+        setTimeout(()=> span.remove(), 5000);
+      }
+    }
   </script>
 </body>
 </html>
