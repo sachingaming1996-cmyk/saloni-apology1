@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Saloni 💌</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffe6f0, #fff);
+      text-align: center;
+      padding: 20px;
+    }
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .hidden { display: none; }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background: #ff4d6d;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background: #e63950; }
+    .envelope {
+      font-size: 60px;
+      animation: float 2s infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .letter {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: inline-block;
+      max-width: 500px;
+    }
+    /* Game */
+    #game-area {
+      margin: 20px auto;
+      width: 300px; height: 300px;
+      background: #fff;
+      border: 2px dashed #ff4d6d;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    /* End Scene */
+    .scene {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 40px;
+    }
+    .batman .head {
+      width: 50px; height: 50px;
+      background: black;
+      border-radius: 50% 50% 40% 40%;
+      margin: auto;
+    }
+    .batman .body {
+      width: 40px; height: 60px;
+      background: black;
+      margin: 0 auto;
+    }
+    .batman .cape {
+      width: 80px; height: 40px;
+      background: black;
+      margin: auto;
+      border-radius: 0 0 50% 50%;
+    }
+    .kitty .face {
+      width: 50px; height: 50px;
+      background: white;
+      border: 2px solid black;
+      border-radius: 50%;
+      margin: auto;
+      position: relative;
+    }
+    .kitty .ears {
+      width: 0; height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 20px solid white;
+      position: relative;
+      top: -10px; left: 5px;
+    }
+    .kitty .whiskers {
+      width: 60px; height: 2px;
+      background: black;
+      margin: 5px auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Start Screen -->
+  <div id="start-screen" class="screen active">
+    <div class="envelope">✉️</div>
+    <p>Something special is coming...</p>
+    <button onclick="openLetter()">Open</button>
+  </div>
+
+  <!-- Letter Screen -->
+  <div id="letter-screen" class="screen">
+    <div class="letter">
+      <h2>Dear Saloni,</h2>
+      <p>
+        Some words are simple, some words are deep,<br>
+        But my love for you is yours to keep.<br>
+        Through mistakes and fights we grow,<br>
+        Saloni, I never want to let you go. 💕
+      </p>
+      <button onclick="showGame()">Next</button>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="screen">
+    <h2>Catch the Hearts 💖</h2>
+    <p>Click on 5 hearts to win my love!</p>
+    <div id="game-area"></div>
+    <p id="score">Score: 0</p>
+    <button id="next-btn" class="hidden" onclick="showLove()">Next</button>
+  </div>
+
+  <!-- Love You Screen -->
+  <div id="love-screen" class="screen">
+    <h2>I Love You ❤️</h2>
+    <p>I regret my careless mistakes… but I'll never stop loving you, Saloni.</p>
+    <button onclick="showEnd()">Next</button>
+  </div>
+
+  <!-- End Screen -->
+  <div id="end-screen" class="screen">
+    <h2>This is Us btw 💕</h2>
+    <div class="scene">
+      <!-- Batman -->
+      <div class="batman">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="cape"></div>
+      </div>
+      <!-- Kitty -->
+      <div class="kitty">
+        <div class="ears"></div>
+        <div class="face"></div>
+        <div class="whiskers"></div>
+      </div>
+    </div>
+    <p>Batman 🦇 + Kitty 🐱 forever</p>
+  </div>
+
+  <script>
+    function openLetter() {
+      document.getElementById("start-screen").classList.remove("active");
+      document.getElementById("letter-screen").classList.add("active");
+    }
+    function showGame() {
+      document.getElementById("letter-screen").classList.remove("active");
+      document.getElementById("game-screen").classList.add("active");
+      startGame();
+    }
+    let score = 0;
+    function startGame() {
+      const area = document.getElementById("game-area");
+      area.innerHTML = "";
+      score = 0;
+      updateScore();
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "❤️";
+        heart.style.top = Math.random() * 270 + "px";
+        heart.style.left = Math.random() * 270 + "px";
+        heart.onclick = () => {
+          heart.remove();
+          score++;
+          updateScore();
+          if (score >= 5) {
+            document.getElementById("next-btn").classList.remove("hidden");
+          }
+        };
+        area.appendChild(heart);
+      }
+    }
+    function updateScore() {
+      document.getElementById("score").innerText = "Score: " + score;
+    }
+    function showLove() {
+      document.getElementById("game-screen").classList.remove("active");
+      document.getElementById("love-screen").classList.add("active");
+    }
+    function showEnd() {
+      document.getElementById("love-screen").classList.remove("active");
+      document.getElementById("end-screen").classList.add("active");
+    }
+  </script>
+</body>
+</html>
