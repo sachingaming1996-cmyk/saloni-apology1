@@ -1,216 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Saloni ❤️</title>
-  <style>
-    :root {
-      --brand: #d6336c;
-      --brand-dark: #b52d59;
-      --bg1: #ffdde1;
-      --bg2: #ee9ca7;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      color: #333;
-      overflow-x: hidden;
-    }
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      color: var(--brand);
-      animation: fadeIn 2s ease-in-out;
-    }
-    p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s forwards;
-    }
-    .page {
-      display: none;
-      min-height: 100vh;
-      padding: 60px 20px;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
-    .page.active { display: block; }
-    .nav-btn {
-      background: var(--brand);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 25px;
-      margin-top: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .nav-btn:hover { background: var(--brand-dark); }
-    .game-area {
-      position: relative;
-      width: 100%;
-      height: 400px;
-      background: rgba(255,255,255,0.8);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-    .heart {
-      position: absolute;
-      font-size: 2rem;
-      cursor: pointer;
-      animation: float 6s linear infinite;
-    }
-    @keyframes float {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(-120%); opacity: 1; }
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-    .score {
-      font-size: 1.5rem;
-      margin: 20px 0;
-      color: var(--brand);
-    }
-    .music-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      z-index: 999;
-    }
-    .confetti {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .confetti span {
-      position: absolute;
-      display: block;
-      width: 10px; height: 10px;
-      background: red;
-      animation: fall 4s linear infinite;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Saloni ❤️</title>
+<style>
+:root {
+  --brand: #ff4d6d;
+  --brand-dark: #d6336c;
+  --bg1: #fff0f5;
+  --bg2: #ffd6e0;
+}
+* {box-sizing: border-box; margin:0; padding:0;}
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  min-height: 100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  overflow-x:hidden;
+}
+.page {
+  display:none; text-align:center; padding:60px 20px;
+  animation: fadeSlide 1s ease;
+}
+.page.active {display:block;}
+h1 {
+  font-size:2.2rem; color:var(--brand);
+  margin-bottom:20px;
+}
+p {
+  font-size:1.2rem; line-height:1.6;
+  min-height:80px;
+}
+.nav-btn {
+  margin-top:30px;
+  padding:12px 28px;
+  border:none; border-radius:50px;
+  background:var(--brand); color:white;
+  font-size:1rem; cursor:pointer;
+  transition:0.3s; box-shadow:0 4px 8px rgba(0,0,0,0.2);
+}
+.nav-btn:hover {transform:scale(1.05); background:var(--brand-dark);}
+.progress {
+  width:80%; height:10px; border-radius:5px;
+  background:#eee; margin:20px auto;
+  overflow:hidden;
+}
+.progress-bar {
+  height:100%; width:0;
+  background:var(--brand); transition:width 0.5s;
+}
+.typing {border-right:2px solid var(--brand); white-space:pre-wrap;}
+.game-area {
+  position:relative; width:100%; max-width:400px; height:400px;
+  margin:0 auto; border-radius:20px; background:rgba(255,255,255,0.8); overflow:hidden;
+}
+.heart {
+  position:absolute; font-size:2rem; cursor:pointer;
+  animation: float 6s linear forwards;
+}
+.score {font-size:1.3rem; color:var(--brand); margin:15px 0;}
+@keyframes fadeSlide {
+  from {opacity:0; transform:translateY(30px);}
+  to {opacity:1; transform:translateY(0);}
+}
+@keyframes float {
+  from {transform:translateY(100%); opacity:0;}
+  to {transform:translateY(-120%); opacity:1;}
+}
+.music-btn {
+  position:fixed; top:15px; right:15px;
+  border:none; background:white;
+  border-radius:50%; width:50px; height:50px;
+  box-shadow:0 4px 6px rgba(0,0,0,0.2);
+  font-size:1.2rem; cursor:pointer;
+}
+.confetti {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  pointer-events:none; overflow:hidden;
+}
+.confetti span {
+  position:absolute; display:block; width:10px; height:10px;
+  background:red; animation: fall 4s linear forwards;
+}
+@keyframes fall {
+  0% {transform:translateY(-10%) rotate(0deg); opacity:1;}
+  100% {transform:translateY(110vh) rotate(720deg); opacity:0;}
+}
+</style>
 </head>
 <body>
-  <button class="music-btn" id="musicBtn">🔊</button>
-  <audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"/>
-  </audio>
+<button class="music-btn" id="musicBtn">🔊</button>
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="container">
-    <!-- Pages -->
-    <div class="page active" id="page1"><h1>Dear Saloni ❤️</h1><p>Shayad kabhi kabhi main tumhe hurt kar deta hoon, aur mujhe is baat ka bahut afsos hai.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page2"><h1>Sorry 🙏</h1><p>Tum meri duniya ho, aur main tumhe khona nahi chahta.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page3"><h1>Promise 🤞</h1><p>Main hamesha tumhe izzat aur pyaar dunga, chahe kuch bhi ho jaye.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page4"><h1>Tum meri Muskaan ho 😊</h1><p>Tumhari ek smile mere din ko roshan kar deti hai.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page5"><h1>My Best Friend 💕</h1><p>Tum sirf meri love nahi, meri best dost bhi ho.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page6"><h1>Support 🌸</h1><p>Har mushkil waqt mein tum meri strength bani ho.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page7"><h1>Care 💖</h1><p>Main tumhe hamesha care karunga, chahe main kitna bhi busy rahu.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page8"><h1>Dreams ✨</h1><p>Main chahta hoon hum ek saath apne saare sapne poore karein.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page9"><h1>Future 🏡</h1><p>Main apna future tumhare bina soch bhi nahi sakta.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page10"><h1>Tum meri Duniya ho 🌍</h1><p>Tum meri life ki sabse important insaan ho.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page11"><h1>Smile 🌹</h1><p>Main tumhe hamesha khush rakhna chahta hoon.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page12"><h1>Meri Khushi 🌟</h1><p>Meri sabse badi khushi tum ho, Saloni.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page13"><h1>Forgive Me 🥺</h1><p>Mujhe maaf kar do, galtiyan meri thi, par dil sirf tumhara hai.</p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-    <div class="page" id="page14"><h1>Game Time 🎮</h1><p>15 hearts pakdo aur mera dil jeet lo ❤️</p><div class="score" id="score">Score: 0 / 15</div><div class="game-area" id="gameArea"></div></div>
-    <div class="page" id="page15"><h1>Saloni ❤️</h1><p>Tum meri life ki sabse pyari cheez ho. Main hamesha tumhare saath rahna chahta hoon.</p><p>Will you forgive me? 🌹</p></div>
-  </div>
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
 
-  <div class="confetti" id="confetti"></div>
+<div class="page active" id="page1"><h1>Dear Saloni ❤️</h1><p class="typing" data-text="Shayad kabhi maine tumhe hurt kiya ho... aur mujhe is baat ka bahut afsos hai."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page2"><h1>Sorry 🙏</h1><p class="typing" data-text="Tum meri duniya ho... aur main tumhe khona nahi chahta."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page3"><h1>Promise 🤞</h1><p class="typing" data-text="Main hamesha tumhe izzat aur pyaar dunga, chahe kuch bhi ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page4"><h1>Smile 😊</h1><p class="typing" data-text="Tumhari ek smile meri duniya roshan kar deti hai."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page5"><h1>Dost 💕</h1><p class="typing" data-text="Tum meri best friend aur meri love dono ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page6"><h1>Support 🌸</h1><p class="typing" data-text="Har mushkil mein tum meri strength bani ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page7"><h1>Care 💖</h1><p class="typing" data-text="Main tumhe hamesha care karunga."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page8"><h1>Dreams ✨</h1><p class="typing" data-text="Main chahta hoon hum apne saare sapne saath poore karein."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page9"><h1>Future 🏡</h1><p class="typing" data-text="Tumhare bina main apna future soch bhi nahi sakta."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page10"><h1>Duniya 🌍</h1><p class="typing" data-text="Tum meri life ki sabse important insan ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page11"><h1>Hamesha 🌹</h1><p class="typing" data-text="Main tumhe hamesha khush rakhne ki koshish karunga."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page12"><h1>Khushi 🌟</h1><p class="typing" data-text="Meri sabse badi khushi tum ho, Saloni."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page13"><h1>Forgive 🥺</h1><p class="typing" data-text="Mujhe maaf kar do, galtiyan meri thi par dil sirf tumhara hai."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
+<div class="page" id="page14"><h1>Game Time 🎮</h1><p class="typing" data-text="15 hearts pakdo aur mera dil jeet lo ❤️"></p><div class="score" id="score">Score: 0 / 15</div><div class="game-area" id="gameArea"></div></div>
+<div class="page" id="page15"><h1>Saloni ❤️</h1><p class="typing" data-text="Tum meri life ki sabse pyari cheez ho. Main hamesha tumhare saath rahna chahta hoon. Will you forgive me? 🌹"></p></div>
 
-  <script>
-    let currentPage = 1;
-    function nextPage() {
-      document.getElementById("page"+currentPage).classList.remove("active");
-      currentPage++;
-      document.getElementById("page"+currentPage).classList.add("active");
-      if (currentPage === 14) startGame();
+<div class="confetti" id="confetti"></div>
+
+<script>
+let currentPage=1, totalPages=15;
+function nextPage(){
+  document.getElementById("page"+currentPage).classList.remove("active");
+  currentPage++;
+  document.getElementById("page"+currentPage).classList.add("active");
+  updateProgress();
+  if(currentPage===14) startGame();
+  typeEffect(document.querySelector("#page"+currentPage+" .typing"));
+}
+function updateProgress(){
+  document.getElementById("progressBar").style.width=((currentPage-1)/(totalPages-1))*100+"%";
+}
+// Typing effect
+function typeEffect(el){
+  if(!el) return;
+  const text=el.getAttribute("data-text");
+  el.innerText="";
+  let i=0;
+  function typing(){
+    if(i<text.length){
+      el.innerText+=text.charAt(i);
+      i++; setTimeout(typing,50);
     }
+  }
+  typing();
+}
+typeEffect(document.querySelector("#page1 .typing"));
 
-    // Game logic
-    const gameArea = document.getElementById("gameArea");
-    let score = 0;
-    function startGame() {
-      score = 0;
-      document.getElementById("score").innerText = "Score: 0 / 15";
-      spawnHeart();
+// Game
+const gameArea=document.getElementById("gameArea");
+let score=0;
+function startGame(){
+  score=0; document.getElementById("score").innerText="Score: 0 / 15";
+  spawnHeart();
+}
+function spawnHeart(){
+  const heart=document.createElement("div");
+  heart.innerHTML="❤️"; heart.className="heart";
+  heart.style.left=Math.random()*90+"%";
+  heart.style.top="100%";
+  heart.style.animationDuration=(3+Math.random()*3)+"s";
+  gameArea.appendChild(heart);
+  heart.addEventListener("click",()=>{
+    score++;
+    document.getElementById("score").innerText="Score: "+score+" / 15";
+    heart.remove();
+    if(score>=15){
+      document.getElementById("page14").classList.remove("active");
+      document.getElementById("page15").classList.add("active");
+      launchConfetti();
+      typeEffect(document.querySelector("#page15 .typing"));
     }
-    function spawnHeart() {
-      const heart = document.createElement("div");
-      heart.innerHTML = "❤️";
-      heart.className = "heart";
-      heart.style.left = Math.random() * 90 + "%";
-      heart.style.top = "100%";
-      heart.style.animationDuration = (3 + Math.random()*3) + "s";
-      gameArea.appendChild(heart);
-
-      heart.addEventListener("click", () => {
-        score++;
-        document.getElementById("score").innerText = "Score: " + score + " / 15";
-        heart.remove();
-        if (score >= 15) {
-          document.getElementById("page14").classList.remove("active");
-          document.getElementById("page15").classList.add("active");
-          launchConfetti();
-        }
-      });
-
-      setTimeout(() => {
-        if (gameArea.contains(heart)) heart.remove();
-      }, 6000);
-
-      if (score < 15) {
-        setTimeout(spawnHeart, 1000);
-      }
-    }
-
-    // Music toggle
-    const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-    let isPlaying = false;
-    musicBtn.addEventListener("click", () => {
-      if (!isPlaying) {
-        bgMusic.play();
-        musicBtn.innerText = "🔈";
-      } else {
-        bgMusic.pause();
-        musicBtn.innerText = "🔊";
-      }
-      isPlaying = !isPlaying;
-    });
-
-    // Confetti
-    function launchConfetti() {
-      const confetti = document.getElementById("confetti");
-      for (let i=0; i<100; i++) {
-        const span = document.createElement("span");
-        span.style.left = Math.random()*100 + "vw";
-        span.style.background = `hsl(${Math.random()*360}, 70%, 60%)`;
-        span.style.animationDuration = (2+Math.random()*3) + "s";
-        confetti.appendChild(span);
-        setTimeout(()=> span.remove(), 5000);
-      }
-    }
-  </script>
+  });
+  setTimeout(()=>{if(gameArea.contains(heart)) heart.remove();},6000);
+  if(score<15) setTimeout(spawnHeart,1000);
+}
+// Music
+const bgMusic=document.getElementById("bgMusic");
+const musicBtn=document.getElementById("musicBtn");
+let isPlaying=false;
+musicBtn.addEventListener("click",()=>{
+  if(!isPlaying){bgMusic.play(); musicBtn.innerText="🔈";}
+  else{bgMusic.pause(); musicBtn.innerText="🔊";}
+  isPlaying=!isPlaying;
+});
+// Confetti
+function launchConfetti(){
+  const confetti=document.getElementById("confetti");
+  for(let i=0;i<100;i++){
+    const span=document.createElement("span");
+    span.style.left=Math.random()*100+"vw";
+    span.style.background=`hsl(${Math.random()*360},70%,60%)`;
+    span.style.animationDuration=(2+Math.random()*3)+"s";
+    confetti.appendChild(span);
+    setTimeout(()=>span.remove(),5000);
+  }
+}
+</script>
 </body>
 </html>
