@@ -1,197 +1,286 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sorry Saloni ❤️</title>
-<style>
-:root {
-  --brand: #ff4d6d;
-  --brand-dark: #d6336c;
-  --bg1: #fff0f5;
-  --bg2: #ffd6e0;
-}
-* {box-sizing: border-box; margin:0; padding:0;}
-body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, var(--bg1), var(--bg2));
-  min-height: 100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  overflow-x:hidden;
-}
-.page {
-  display:none; text-align:center; padding:60px 20px;
-  animation: fadeSlide 1s ease;
-}
-.page.active {display:block;}
-h1 {
-  font-size:2.2rem; color:var(--brand);
-  margin-bottom:20px;
-}
-p {
-  font-size:1.2rem; line-height:1.6;
-  min-height:80px;
-}
-.nav-btn {
-  margin-top:30px;
-  padding:12px 28px;
-  border:none; border-radius:50px;
-  background:var(--brand); color:white;
-  font-size:1rem; cursor:pointer;
-  transition:0.3s; box-shadow:0 4px 8px rgba(0,0,0,0.2);
-}
-.nav-btn:hover {transform:scale(1.05); background:var(--brand-dark);}
-.progress {
-  width:80%; height:10px; border-radius:5px;
-  background:#eee; margin:20px auto;
-  overflow:hidden;
-}
-.progress-bar {
-  height:100%; width:0;
-  background:var(--brand); transition:width 0.5s;
-}
-.typing {border-right:2px solid var(--brand); white-space:pre-wrap;}
-.game-area {
-  position:relative; width:100%; max-width:400px; height:400px;
-  margin:0 auto; border-radius:20px; background:rgba(255,255,255,0.8); overflow:hidden;
-}
-.heart {
-  position:absolute; font-size:2rem; cursor:pointer;
-  animation: float 6s linear forwards;
-}
-.score {font-size:1.3rem; color:var(--brand); margin:15px 0;}
-@keyframes fadeSlide {
-  from {opacity:0; transform:translateY(30px);}
-  to {opacity:1; transform:translateY(0);}
-}
-@keyframes float {
-  from {transform:translateY(100%); opacity:0;}
-  to {transform:translateY(-120%); opacity:1;}
-}
-.music-btn {
-  position:fixed; top:15px; right:15px;
-  border:none; background:white;
-  border-radius:50%; width:50px; height:50px;
-  box-shadow:0 4px 6px rgba(0,0,0,0.2);
-  font-size:1.2rem; cursor:pointer;
-}
-.confetti {
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  pointer-events:none; overflow:hidden;
-}
-.confetti span {
-  position:absolute; display:block; width:10px; height:10px;
-  background:red; animation: fall 4s linear forwards;
-}
-@keyframes fall {
-  0% {transform:translateY(-10%) rotate(0deg); opacity:1;}
-  100% {transform:translateY(110vh) rotate(720deg); opacity:0;}
-}
-</style>
-</head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fce7f3" />
+  <title>For Saloni — the one I call Shona 💛</title>
+  <meta name="description" content="A premium, 15-step tap-to-advance love story for Saloni — music, glowing heart, typewriter, silky animations." />  <!-- Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Great+Vibes&display=swap" rel="stylesheet">  <style>
+    /* ===== Theme ===== */
+    :root {
+      --bg1: 255 247 250;            /* rose-50 */
+      --bg2: 255 228 235;            /* soft pink */
+      --ink: 41 37 36;               /* neutral-800 */
+      --accent: 236 72 153;          /* fuchsia-500 */
+      --accent-2: 99 102 241;        /* indigo-500 */
+      --glass: 255 255 255 / 0.78;
+      --card: 255 255 255;
+      --ring: 236 72 153 / 0.28;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: rgb(var(--ink));
+      background:
+        radial-gradient(1200px 800px at 8% 0%, rgba(var(--accent), 0.07), transparent 60%),
+        radial-gradient(1200px 800px at 92% 20%, rgba(var(--accent-2), 0.08), transparent 60%),
+        linear-gradient(180deg, rgb(var(--bg1)) 0%, rgb(var(--bg2)) 100%);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== Floating hearts background ===== */
+    .float-layer { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+    .heart {
+      position: absolute; width: 18px; height: 18px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      background: radial-gradient(circle at 30% 30%, rgba(var(--accent), .95), rgba(var(--accent), .7));
+      animation: floatUp linear both;
+      filter: drop-shadow(0 6px 8px rgba(236, 72, 153, .25));
+    }
+    .heart::before, .heart::after { content: ""; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: inherit; }
+    .heart::before { top: -50%; left: 0; }
+    .heart::after  { left: -50%; top: 0; }
+    @keyframes floatUp { from { transform: translate(var(--x,0), var(--y,0)) rotate(45deg); opacity: .85; } to { transform: translate(calc(var(--x,0) + var(--drift,0px)), -120vh) rotate(45deg); opacity: 0; } }
+
+    /* ===== Card layout ===== */
+    .wrap { position: relative; height: 100dvh; display: grid; place-items: center; padding: 20px; }
+    .card {
+      width: min(900px, 95vw);
+      min-height: min(680px, 86dvh);
+      border-radius: 30px;
+      background: color-mix(in oklab, rgb(var(--card)) 74%, rgba(var(--bg2), .36));
+      backdrop-filter: saturate(140%) blur(12px);
+      -webkit-backdrop-filter: saturate(140%) blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08), 0 3px 12px rgba(236,72,153,.12);
+      border: 1px solid rgba(236,72,153,.18);
+      overflow: hidden;
+      position: relative;
+    }
+    .ribbon { position: absolute; inset: 0; pointer-events: none; opacity: .55;
+      background:
+        radial-gradient(900px 200px at 50% -15%, rgba(var(--accent), .15), transparent 70%),
+        radial-gradient(600px 160px at 100% 20%, rgba(var(--accent-2), .12), transparent 70%),
+        radial-gradient(600px 160px at 0% 85%, rgba(var(--accent), .10), transparent 70%);
+    }
+
+    .content { position: relative; height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
+    header { padding: 26px 26px 6px; text-align: center; }
+    header h1 { margin: 0; font-weight: 800; font-size: clamp(26px, 5vw, 40px); letter-spacing: .2px; }
+    header .script { font-family: 'Great Vibes', cursive; font-size: clamp(28px, 6vw, 48px); color: rgb(var(--accent)); text-shadow: 0 1px 0 rgba(255,255,255,.6); }
+
+    main { display: grid; place-items: center; padding: 8px 26px 0; }
+    .step {
+      width: 100%; max-width: 720px;
+      padding: clamp(18px, 4vw, 28px);
+      border-radius: 22px;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(236,72,153,.18);
+      box-shadow: 0 12px 24px rgba(236,72,153,.10), 0 2px 8px rgba(0,0,0,.05);
+      transform-origin: 50% 60%;
+      animation: popIn .6s cubic-bezier(.2,.9,.2,1) both;
+    }
+    @keyframes popIn { from { opacity: 0; transform: translateY(14px) scale(.985) rotateX(4deg); } to { opacity: 1; transform: translateY(0) scale(1) rotateX(0); } }
+
+    .title { font-weight: 700; font-size: clamp(18px, 3.2vw, 24px); margin-bottom: 8px; }
+    .big   { font-size: clamp(28px, 5.6vw, 40px); font-weight: 800; }
+    .muted { opacity: .82; }
+    .script-inline { font-family: 'Great Vibes', cursive; color: rgb(var(--accent)); font-size: 1.2em; }
+
+    .kudos { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-top: 8px; }
+    .pill { padding: 10px 12px; border-radius: 14px; border: 1px solid rgba(0,0,0,.06); background: rgba(255,255,255,.7); font-size: 14px; display: flex; align-items: center; gap: 8px; box-shadow: 0 6px 12px rgba(0,0,0,.04); }
+
+    .progress { display: grid; gap: 10px; padding: 14px 18px 22px; }
+    .bar { height: 6px; width: 100%; border-radius: 999px; background: rgba(0,0,0,.08); overflow: hidden; }
+    .bar > i { display: block; height: 100%; width: var(--w, 0%); background: linear-gradient(90deg, rgba(236,72,153,.9), rgba(99,102,241,.85)); transition: width .35s ease; border-radius: inherit; }
+    .dots { display: flex; justify-content: center; gap: 8px; }
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(0,0,0,.15); transition: .3s transform, .3s background; }
+    .dot.active { background: rgba(236,72,153,.9); transform: scale(1.6); box-shadow: 0 0 0 6px rgba(236,72,153,.15); }
+    .count { text-align: center; font-size: 12px; opacity: .75; }
+
+    .hint { position: absolute; inset: auto 16px 12px; text-align: center; font-size: 12px; opacity: .75; }
+
+    .cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 18px; border-radius: 16px; font-weight: 700; border: 1px solid rgba(236,72,153,.35); background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7)); box-shadow: 0 10px 18px rgba(236,72,153,.18), inset 0 1px 0 rgba(255,255,255,.8); cursor: pointer; user-select: none; }
+    .cta:active { transform: translateY(1px); }
+
+    /* Confetti */
+    .confetti { position: fixed; top: -10px; left: 0; right: 0; pointer-events: none; z-index: 40; }
+    .confetti i { position: absolute; width: var(--s); height: var(--s); transform: rotate(var(--r)); border-radius: 2px; background: hsl(var(--h), 90%, 60%); animation: fall var(--d) linear forwards; opacity: .9; }
+    @keyframes fall { from { transform: translate(var(--x), -10px) rotate(var(--r)); } to { transform: translate(var(--xEnd), 105vh) rotate(calc(var(--r) + 180deg)); opacity: 0; } }
+
+    /* Typewriter (CSS version) */
+    .type { overflow: hidden; white-space: nowrap; border-right: 3px solid rgba(236,72,153,.85); animation: typing 2.6s steps(24,end), caret 1s step-end infinite; }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes caret { 50% { border-color: transparent } }
+
+    /* Glow + heartbeat for finale */
+    .glow-heart { position: relative; width: 120px; height: 120px; margin: 10px auto 6px; transform: rotate(45deg); background: radial-gradient(circle at 30% 30%, rgba(var(--accent), 1), rgba(var(--accent), .8)); border-radius: 16px; filter: drop-shadow(0 0 16px rgba(236,72,153,.6)); animation: beat 1.2s infinite; }
+    .glow-heart::before, .glow-heart::after { content: ""; position: absolute; width: 120px; height: 120px; border-radius: 50%; background: inherit; }
+    .glow-heart::before { left: -60px; top: 0; }
+    .glow-heart::after { left: 0; top: -60px; }
+    @keyframes beat { 0%, 100% { transform: rotate(45deg) scale(1); filter: drop-shadow(0 0 14px rgba(236,72,153,.55)); } 50% { transform: rotate(45deg) scale(1.08); filter: drop-shadow(0 0 26px rgba(236,72,153,.85)); } }
+
+    .shine { background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255,255,255,.9) 45%, rgba(0,0,0,0) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 2.8s linear infinite; }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+    /* Music control */
+    .audio-btn { position: fixed; top: 14px; right: 14px; z-index: 50; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; font-weight: 700; border: 1px solid rgba(236,72,153,.35); background: rgba(255,255,255,.9); box-shadow: 0 10px 18px rgba(236,72,153,.18); cursor: pointer; user-select: none; }
+    .audio-btn span { font-size: 13px; }
+    .audio-dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(99,102,241,.9); box-shadow: 0 0 0 6px rgba(99,102,241,.18); }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) { .heart, .confetti i, .step, .glow-heart { animation: none !important; } }
+  </style></head>
 <body>
-<button class="music-btn" id="musicBtn">🔊</button>
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+  <!-- Background hearts -->
+  <div class="float-layer" id="float-layer"></div>  <!-- Audio (replace music.mp3 with your file) -->  <audio id="bgm" preload="auto" loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+  <button class="audio-btn" id="audio-btn" aria-pressed="false" aria-label="Toggle background music">
+    <div class="audio-dot" id="audio-dot"></div><span id="audio-label">Sound Off</span>
+  </button>  <div class="wrap" id="tap-area" aria-live="polite" aria-atomic="true">
+    <div class="card" role="region" aria-label="Love story for Saloni">
+      <div class="ribbon"></div><div class="content">
+    <header>
+      <div class="script">For my Saloni</div>
+      <h1>…the one I lovingly call <span class="script">Shona</span> 🫶</h1>
+    </header>
 
-<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+    <main>
+      <section class="step" id="step"></section>
+    </main>
 
-<div class="page active" id="page1"><h1>Dear Saloni ❤️</h1><p class="typing" data-text="Shayad kabhi maine tumhe hurt kiya ho... aur mujhe is baat ka bahut afsos hai."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page2"><h1>Sorry 🙏</h1><p class="typing" data-text="Tum meri duniya ho... aur main tumhe khona nahi chahta."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page3"><h1>Promise 🤞</h1><p class="typing" data-text="Main hamesha tumhe izzat aur pyaar dunga, chahe kuch bhi ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page4"><h1>Smile 😊</h1><p class="typing" data-text="Tumhari ek smile meri duniya roshan kar deti hai."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page5"><h1>Dost 💕</h1><p class="typing" data-text="Tum meri best friend aur meri love dono ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page6"><h1>Support 🌸</h1><p class="typing" data-text="Har mushkil mein tum meri strength bani ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page7"><h1>Care 💖</h1><p class="typing" data-text="Main tumhe hamesha care karunga."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page8"><h1>Dreams ✨</h1><p class="typing" data-text="Main chahta hoon hum apne saare sapne saath poore karein."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page9"><h1>Future 🏡</h1><p class="typing" data-text="Tumhare bina main apna future soch bhi nahi sakta."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page10"><h1>Duniya 🌍</h1><p class="typing" data-text="Tum meri life ki sabse important insan ho."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page11"><h1>Hamesha 🌹</h1><p class="typing" data-text="Main tumhe hamesha khush rakhne ki koshish karunga."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page12"><h1>Khushi 🌟</h1><p class="typing" data-text="Meri sabse badi khushi tum ho, Saloni."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page13"><h1>Forgive 🥺</h1><p class="typing" data-text="Mujhe maaf kar do, galtiyan meri thi par dil sirf tumhara hai."></p><button class="nav-btn" onclick="nextPage()">Next ➡️</button></div>
-<div class="page" id="page14"><h1>Game Time 🎮</h1><p class="typing" data-text="15 hearts pakdo aur mera dil jeet lo ❤️"></p><div class="score" id="score">Score: 0 / 15</div><div class="game-area" id="gameArea"></div></div>
-<div class="page" id="page15"><h1>Saloni ❤️</h1><p class="typing" data-text="Tum meri life ki sabse pyari cheez ho. Main hamesha tumhare saath rahna chahta hoon. Will you forgive me? 🌹"></p></div>
+    <div class="progress">
+      <div class="bar"><i id="bar"></i></div>
+      <div class="dots" id="progress"></div>
+      <div class="count" id="count"></div>
+    </div>
+    <div class="hint" id="hint">Tap / click or swipe → to continue</div>
+  </div>
+</div>
 
-<div class="confetti" id="confetti"></div>
+  </div>  <div class="confetti" id="confetti"></div>  <script>
+    const PERSON = { name: 'Saloni', nick: 'Shona', proposed: '14 Feb 2024', breakup: '10 May 2025' };
 
-<script>
-let currentPage=1, totalPages=15;
-function nextPage(){
-  document.getElementById("page"+currentPage).classList.remove("active");
-  currentPage++;
-  document.getElementById("page"+currentPage).classList.add("active");
-  updateProgress();
-  if(currentPage===14) startGame();
-  typeEffect(document.querySelector("#page"+currentPage+" .typing"));
-}
-function updateProgress(){
-  document.getElementById("progressBar").style.width=((currentPage-1)/(totalPages-1))*100+"%";
-}
-// Typing effect
-function typeEffect(el){
-  if(!el) return;
-  const text=el.getAttribute("data-text");
-  el.innerText="";
-  let i=0;
-  function typing(){
-    if(i<text.length){
-      el.innerText+=text.charAt(i);
-      i++; setTimeout(typing,50);
+    // Letter lines (Hinglish, warm, specific to your memories)
+    const LINES = [
+      `I’m sorry, ${PERSON.name}. Sach me.`,
+      `Mujhe pata hai kabhi kabhi words kam pad jaate hain, aur actions zaroori hote hain.`,
+      `Maine galtiyan ki — aur unka dard tum tak pahucha. For that, I am truly, deeply sorry.`,
+      `Mujhe ab bhi yaad hai hamara picnic — dhoop, hasi, aur tumhari woh cute si teasing.`,
+      `Hamari pehli mulaqat park me, tumhare ghar ke paas… us din se tum meri ${PERSON.nick} ho.`,
+      `2–3 baje raat ki baatein — jab sab sota tha, par hum dono ek dusre ko sunte the.`,
+      `Maine ${PERSON.proposed} ko tumhe propose kiya tha — woh din mere liye hamesha khaas rahega.`,
+      `${PERSON.breakup}… woh date mujhe yaad dilati hai ki pyaar ko protect karna padta hai.`,
+      `Promise karta hoon: zidd se zyada patience, jawaab se pehle samajhna, aur har roz tumhe feel karwana ki you matter.`,
+      `Tumhari smile, aankhein, lips — sab kuch perfect. Sabse zyada tumhara dil.`,
+      `Mere dreams simple hain: world tour saath me, ghar me hansi, aur hamare bacchon ko pyaar.`,
+      `You’re my first, and you’ll always be my last.`,
+      `Agar tum chhota sa chance do, I’ll love you better, slower, and forever.`,
+      `I’m sorry, ${PERSON.nick}. I miss us. I love you.`,
+    ];
+
+    const letter = document.getElementById('letter');
+    let i = 0;
+
+    function addLine(text){
+      const p = document.createElement('p');
+      p.className = 'line show';
+      const span = document.createElement('span');
+      span.className = 'type';
+      const t = Math.min(4, 1.8 + text.length/24);
+      span.style.setProperty('--t', t+'s');
+      span.textContent = text;
+      p.appendChild(span);
+      letter.appendChild(p);
+      letter.scrollTo({ top: letter.scrollHeight, behavior: 'smooth' });
     }
-  }
-  typing();
-}
-typeEffect(document.querySelector("#page1 .typing"));
 
-// Game
-const gameArea=document.getElementById("gameArea");
-let score=0;
-function startGame(){
-  score=0; document.getElementById("score").innerText="Score: 0 / 15";
-  spawnHeart();
-}
-function spawnHeart(){
-  const heart=document.createElement("div");
-  heart.innerHTML="❤️"; heart.className="heart";
-  heart.style.left=Math.random()*90+"%";
-  heart.style.top="100%";
-  heart.style.animationDuration=(3+Math.random()*3)+"s";
-  gameArea.appendChild(heart);
-  heart.addEventListener("click",()=>{
-    score++;
-    document.getElementById("score").innerText="Score: "+score+" / 15";
-    heart.remove();
-    if(score>=15){
-      document.getElementById("page14").classList.remove("active");
-      document.getElementById("page15").classList.add("active");
-      launchConfetti();
-      typeEffect(document.querySelector("#page15 .typing"));
+    function playLetter(){
+      if(i >= LINES.length) return;
+      addLine(LINES[i++]);
+      pulseHearts(8);
+      const delay = 700 + Math.min(2200, LINES[i-1].length*45);
+      setTimeout(playLetter, delay);
     }
-  });
-  setTimeout(()=>{if(gameArea.contains(heart)) heart.remove();},6000);
-  if(score<15) setTimeout(spawnHeart,1000);
-}
-// Music
-const bgMusic=document.getElementById("bgMusic");
-const musicBtn=document.getElementById("musicBtn");
-let isPlaying=false;
-musicBtn.addEventListener("click",()=>{
-  if(!isPlaying){bgMusic.play(); musicBtn.innerText="🔈";}
-  else{bgMusic.pause(); musicBtn.innerText="🔊";}
-  isPlaying=!isPlaying;
-});
-// Confetti
-function launchConfetti(){
-  const confetti=document.getElementById("confetti");
-  for(let i=0;i<100;i++){
-    const span=document.createElement("span");
-    span.style.left=Math.random()*100+"vw";
-    span.style.background=`hsl(${Math.random()*360},70%,60%)`;
-    span.style.animationDuration=(2+Math.random()*3)+"s";
-    confetti.appendChild(span);
-    setTimeout(()=>span.remove(),5000);
-  }
-}
-</script>
-</body>
+
+    // Hearts background
+    const floatLayer = document.getElementById('float-layer');
+    function pulseHearts(count=10){
+      for(let j=0;j<count;j++){
+        const h = document.createElement('div');
+        h.className = 'heart';
+        const x = Math.random()*window.innerWidth;
+        const y = window.innerHeight - Math.random()*120;
+        h.style.left = x+'px';
+        h.style.top = y+'px';
+        h.style.setProperty('--x','0px');
+        h.style.setProperty('--y','0px');
+        h.style.setProperty('--drift', (Math.random()*40 - 20)+'px');
+        h.style.animationDuration = (2.1 + Math.random()*1.3)+'s';
+        floatLayer.appendChild(h);
+        setTimeout(()=> floatLayer.removeChild(h), 3400);
+      }
+    }
+
+    // Confetti
+    function burstConfetti(){
+      const root = document.getElementById('confetti');
+      const N = 180;
+      for(let k=0;k<N;k++){
+        const piece = document.createElement('i');
+        const size = (6 + Math.random()*8) + 'px';
+        const startX = (Math.random()*100) + 'vw';
+        const endX = (Math.random()*100) + 'vw';
+        piece.style.setProperty('--s', size);
+        piece.style.setProperty('--x', startX);
+        piece.style.setProperty('--xEnd', endX);
+        piece.style.setProperty('--r', (Math.random()*360) + 'deg');
+        piece.style.setProperty('--h', Math.floor(Math.random()*360));
+        piece.style.setProperty('--d', (1.6 + Math.random()*1.8) + 's');
+        root.appendChild(piece);
+        setTimeout(()=> piece.remove(), 2400);
+      }
+    }
+
+    // Music controls
+    const audio = document.getElementById('bgm');
+    const audioBtn = document.getElementById('audio-btn');
+    const audioLabel = document.getElementById('audio-label');
+    const audioDot = document.getElementById('audio-dot');
+    let audioInitialized = false;
+
+    function initAudio(){
+      audioInitialized = true;
+      audio.volume = 0.18;
+      audio.play().then(()=> setAudioState(true)).catch(()=> setAudioState(false));
+    }
+    function setAudioState(on){
+      audioBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      audioLabel.textContent = on ? 'Sound On' : 'Sound Off';
+      audioDot.style.background = on ? 'rgba(99,102,241,.9)' : 'rgba(236,72,153,.7)';
+      audioDot.style.boxShadow = on ? '0 0 0 6px rgba(99,102,241,.18)' : '0 0 0 6px rgba(236,72,153,.18)';
+    }
+    audioBtn.addEventListener('click', ()=>{
+      if(!audioInitialized) initAudio();
+      if(audio.paused){ audio.play(); setAudioState(true); } else { audio.pause(); setAudioState(false); }
+    });
+
+    // CTA
+    document.getElementById('forgive').addEventListener('click', ()=>{
+      burstConfetti();
+      pulseHearts(18);
+      addLine('Thank you for listening to my heart.');
+    });
+
+    // User interaction to start audio (first tap anywhere)
+    window.addEventListener('pointerdown', ()=>{ if(!audioInitialized) initAudio(); }, { once:true });
+
+    // Start letter typing
+    window.addEventListener('load', ()=>{
+      setTimeout(playLetter, 600);
+    });
+  </script></body>
 </html>
