@@ -1,383 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>For Saloni 💌</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1f2033; --muted:#63657a; --white:#fff;
-    --pink:#ff5da2; --vio:#7a5cff; --rose:#ff8ab5; --gold:#ffcc4d;
-    --bg:#0f0f13;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; color:var(--ink); font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    background:
-      radial-gradient(1200px 700px at 20% -20%, #e7f0ff 10%, transparent 60%),
-      radial-gradient(1000px 600px at 120% 10%, #ffe6f3 10%, transparent 60%),
-      #fff;
-    overflow-x:hidden;
-  }
-
-  /* Global helpers */
-  .wrap{min-height:100dvh; display:grid; place-items:center; padding:22px}
-  .screen{display:none}
-  .screen.active{display:block}
-  .card{
-    width:min(880px,94vw); background:rgba(255,255,255,.88); backdrop-filter: blur(4px);
-    border-radius:26px; padding:26px; box-shadow:0 20px 60px rgba(0,0,0,.12);
-    position:relative; overflow:hidden;
-  }
-  .title{font-family:"Dancing Script",cursive; color:var(--pink); font-weight:700;
-         font-size:clamp(44px,7vw,68px); margin:6px 0 10px; text-align:center;}
-  .subtitle{color:var(--muted); text-align:center; margin:2px 0 16px}
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:10px;
-    padding:14px 24px; border-radius:999px; border:0; cursor:pointer; font-weight:700;
-    background:linear-gradient(135deg,var(--pink),var(--vio)); color:#fff;
-    box-shadow:0 12px 28px rgba(255,93,162,.35); transition:transform .12s ease, box-shadow .2s ease;
-  }
-  .btn:active{transform:translateY(1px)}
-
-  /* Sparkles / floating hearts background */
-  .bg-hearts{position:absolute; inset:-10% -10% -10% -10%; pointer-events:none; z-index:0; opacity:.35}
-  .bg-hearts span{
-    position:absolute; font-size:18px; animation:float 10s linear infinite; filter:blur(.1px);
-  }
-  @keyframes float{
-    from{transform:translateY(110vh) rotate(0deg); opacity:.9}
-    to{transform:translateY(-20vh) rotate(360deg); opacity:.1}
-  }
-
-  /* Intro envelope + plane */
-  .envelope{width:min(560px,90vw); aspect-ratio:4/2.6; margin:10px auto 2px; position:relative; border-radius:18px; background:#fff; box-shadow:0 10px 30px rgba(0,0,0,.08)}
-  .flap{position:absolute; inset:0; background:linear-gradient(180deg,#a9c9ff,#ffb8e1); clip-path:polygon(0 0,100% 0,50% 60%)}
-  .seal{position:absolute; left:50%; top:58%; transform:translate(-50%,-50%); width:72px; height:72px; border-radius:999px; background:#fff; display:grid; place-items:center; box-shadow:0 8px 18px rgba(0,0,0,.1)}
-  .seal:after{content:"💗"; font-size:28px}
-  .paper{position:absolute; left:7%; right:7%; bottom:8%; height:38%; background:#fff; border-radius:10px; box-shadow:inset 0 0 0 2px #f0f0f0}
-
-  .plane{
-    position:absolute; left:-70px; top:22px; width:44px; height:44px; transform:rotate(25deg);
-    background:
-      conic-gradient(from 225deg at 50% 80%, #fff 0 25%, transparent 0) center/100% 100% no-repeat;
-    border-radius:8px; filter:drop-shadow(0 10px 12px rgba(0,0,0,.15));
-    animation:fly 4.4s ease-in-out infinite;
-  }
-  @keyframes fly{
-    0%{left:-70px; top:30px; opacity:0}
-    10%{opacity:1}
-    50%{left:calc(100% - 60px); top:90px}
-    60%{opacity:1}
-    100%{left:110%; top:0; opacity:0}
-  }
-
-  /* Letter */
-  .letter{
-    position:relative; z-index:1; padding:20px; border-radius:18px; background:#fff8fb; border:2px dashed #ffc8dd;
-  }
-  .type{font-family:"Dancing Script",cursive; font-size:clamp(22px,4.8vw,30px); line-height:1.55; white-space:pre-wrap; min-height:200px}
-  .cursor{display:inline-block; width:10px; border-right:3px solid var(--pink); animation:blink 1s steps(2,end) infinite}
-  @keyframes blink{50%{border-color:transparent}}
-
-  /* Love screen */
-  .love{
-    font-family:"Dancing Script",cursive; font-size:clamp(44px,9vw,84px); color:var(--pink);
-    text-shadow:0 10px 30px rgba(255,93,162,.35);
-    animation:beat 1.6s ease-in-out infinite;
-  }
-  @keyframes beat{
-    0%,100%{transform:scale(1)}
-    25%{transform:scale(1.05)}
-    50%{transform:scale(0.98)}
-    75%{transform:scale(1.06)}
-  }
-
-  /* Regret screen */
-  .sad{
-    background:linear-gradient(180deg,#fafafa,#f2f3f7);
-    border:2px dashed #d8d9e2;
-  }
-  .muted{color:var(--muted)}
-
-  /* Game */
-  .gamecard{padding:18px 18px 8px}
-  .gamebox{
-    height:360px; border-radius:18px; background:linear-gradient(180deg,#ffffff,#fff6fb);
-    border:2px solid #ffe1f0; position:relative; overflow:hidden;
-  }
-  .heart{position:absolute; font-size:28px; cursor:pointer; user-select:none; animation:bounce 1.2s ease-in-out infinite}
-  @keyframes bounce{0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
-  .bar{height:10px; background:#efeaff; border-radius:999px; overflow:hidden}
-  .bar>span{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--pink),var(--vio)); transition:width .25s ease}
-
-  /* End scene: polished Batman & Kitty (SVG scaled) */
-  .sceneWrap{display:grid; place-items:center; gap:14px}
-  .shine{filter: drop-shadow(0 12px 22px rgba(0,0,0,.18))}
-  .endText{color:#5e56ff; font-weight:800; letter-spacing:.2px}
-
-  /* Anim in */
-  .fade{animation:fade .6s ease both}
-  @keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-
-  /* Footer note */
-  .note{font-size:13px; opacity:.7; text-align:center; margin-top:10px}
-</style>
+  <meta charset="UTF-8">
+  <title>Apology for Saloni ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #ffe6f0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    .screen {
+      display: none;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .show {
+      display: flex !important;
+    }
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #e63950;
+    }
+    .plane {
+      font-size: 50px;
+      animation: fly 2s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes fly {
+      0% { transform: translateX(-200px); }
+      100% { transform: translateX(200px); }
+    }
+    .letter {
+      max-width: 600px;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .hearts {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      background: pink;
+    }
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 24px;
+      animation: float 5s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+    .end img {
+      max-width: 300px;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
 
-<div class="wrap">
+  <!-- Screen 1: Start -->
+  <div id="start" class="screen show">
+    <div class="plane">✈️</div>
+    <button onclick="next('letter')">Click to Open</button>
+  </div>
 
-  <!-- Screen 1: Intro -->
-  <section id="scr1" class="screen active">
-    <div class="card fade" style="text-align:center">
-      <div class="bg-hearts" id="heartsIntro"></div>
-      <div class="plane" aria-hidden="true"></div>
-      <div class="envelope">
-        <div class="flap"></div>
-        <div class="paper"></div>
-        <div class="seal"></div>
-      </div>
-      <h1 class="title">Hieieieieie,</h1>
-      <div class="subtitle">I’m Sollyyyyyy 😅</div>
-      <div class="subtitle">Something special is coming for <b>Saloni</b>…</div>
-      <button class="btn" onclick="go('scr2'); startType()">Click to open ✨</button>
-      <div class="note">Made with love for Saloni 💗</div>
+  <!-- Screen 2: Letter -->
+  <div id="letter" class="screen">
+    <div class="letter">
+      <h2>Dear Saloni ❤️</h2>
+      <p>
+        I know I made mistakes, careless ones that hurt you.  
+        But every moment without you feels empty.  
+        You mean the world to me, and I want to make things right.  
+      </p>
+      <p>
+        Please forgive me… because my heart beats only for you.  
+      </p>
+      <button onclick="next('game')">Next ➡️</button>
     </div>
-  </section>
+  </div>
 
-  <!-- Screen 2: Long Letter (typewriter) -->
-  <section id="scr2" class="screen">
-    <div class="card fade">
-      <h2 class="subtitle" style="font-weight:800; color:#6c5cff; text-align:center">My Apology in Verse</h2>
-      <div class="letter">
-        <div id="typebox" class="type"></div><span id="cursor" class="cursor"></span>
-      </div>
-      <div style="display:grid; place-items:center; margin-top:16px">
-        <button class="btn" id="nextFromLetter" onclick="go('scr3')" disabled>Next 💗</button>
-      </div>
-    </div>
-  </section>
+  <!-- Screen 3: Game -->
+  <div id="game" class="screen hearts">
+    <h2 style="position:absolute;top:20px;width:100%;color:white;">Catch the ❤️</h2>
+    <button style="position:absolute;bottom:30px;" onclick="next('love')">Done ✅</button>
+  </div>
 
-  <!-- Screen 3: Love You -->
-  <section id="scr3" class="screen">
-    <div class="card fade" style="text-align:center">
-      <div class="love">I LOVE YOU, SALONI ❤️</div>
-      <div class="subtitle">Always you. Always us.</div>
-      <button class="btn" onclick="go('scr4')">Next →</button>
-    </div>
-  </section>
+  <!-- Screen 4: Love -->
+  <div id="love" class="screen">
+    <h1>I ❤️ You Saloni</h1>
+    <p>I regret my careless mistakes and I promise to be better.</p>
+    <button onclick="next('end')">Next ➡️</button>
+  </div>
 
-  <!-- Screen 4: Regret -->
-  <section id="scr4" class="screen">
-    <div class="card sad fade" style="text-align:center">
-      <h2 style="color:#444; margin-top:6px">I'm truly sorry…</h2>
-      <p class="muted">I regret my careless mistakes and the pain they caused. I’ll do better — promise.</p>
-      <div style="height:10px"></div>
-      <button class="btn" onclick="startGame()">Play a tiny game 💖</button>
-    </div>
-  </section>
+  <!-- Screen 5: End -->
+  <div id="end" class="screen end">
+    <h2>This is Us btw 💕</h2>
+    <img src="https://i.ibb.co/1qjYkL4/batman-kitty.png" alt="Batman and Kitty">
+    <p>Batman 🦇 + Kitty 🐱 forever</p>
+  </div>
 
-  <!-- Screen 5: Game -->
-  <section id="scr5" class="screen">
-    <div class="card gamecard fade">
-      <h3 class="subtitle" style="text-align:center; color:#6c5cff">Catch hearts to unlock the message</h3>
-      <div class="bar" aria-hidden="true"><span id="barFill"></span></div>
-      <div class="gamebox" id="game"></div>
-      <div style="text-align:center; margin:10px 0 2px">
-        <b><span id="score">0</span>/7</b> hearts caught
-      </div>
-      <div style="display:grid; place-items:center; margin:8px 0 6px">
-        <button class="btn" id="nextBtn" disabled onclick="go('scr6')">Unlocked! Continue ✨</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screen 6: This is us btw (Batman + Kitty) -->
-  <section id="scr6" class="screen">
-    <div class="card fade">
-      <h2 class="endText" style="text-align:center">This is Us btw 💕</h2>
-      <div class="sceneWrap">
-        <!-- Polished inline SVG illustration -->
-        <svg class="shine" width="540" height="260" viewBox="0 0 540 260" xmlns="http://www.w3.org/2000/svg" aria-label="Batman and Kitty cute illustration">
-          <!-- Soft background -->
-          <defs>
-            <radialGradient id="g" cx="50%" cy="40%" r="70%">
-              <stop offset="0%" stop-color="#fff3fb"/>
-              <stop offset="100%" stop-color="#eaf0ff"/>
-            </radialGradient>
-            <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect x="0" y="0" width="540" height="260" rx="22" fill="url(#g)"/>
-          <!-- Batman (chibi) -->
-          <g transform="translate(120,40)" filter="url(#glow)">
-            <!-- cape -->
-            <path d="M-10 150 C 20 120, 100 120, 130 150 L130 170 L-10 170 Z" fill="#0b0b12"/>
-            <!-- body -->
-            <rect x="20" y="70" width="90" height="90" rx="20" fill="#14141b"/>
-            <!-- head -->
-            <g>
-              <path d="M25 30 h80 a18 18 0 0 1 18 18 v30 a28 28 0 0 1 -28 28 h-60 a28 28 0 0 1 -28 -28 v-30 a18 18 0 0 1 18 -18 z" fill="#14141b"/>
-              <!-- ears -->
-              <path d="M30 28 l10 -22 l10 22" fill="#14141b"/>
-              <path d="M90 28 l10 -22 l10 22" fill="#14141b"/>
-              <!-- eyes -->
-              <ellipse cx="55" cy="70" rx="10" ry="6" fill="#fff"/>
-              <ellipse cx="95" cy="70" rx="10" ry="6" fill="#fff"/>
-            </g>
-            <!-- belt -->
-            <rect x="20" y="120" width="90" height="12" rx="6" fill="#ffcc4d"/>
-            <!-- bat logo -->
-            <ellipse cx="65" cy="105" rx="28" ry="16" fill="#ffcc4d" stroke="#000" stroke-width="3"/>
-            <path d="M48 100 q17 -12 34 0 q-8 2 -8 8 q8 0 8 8 q-17 -12 -34 0 q8 0 8 -8 q0 -6 -8 -8z" fill="#000"/>
-          </g>
-
-          <!-- Kitty -->
-          <g transform="translate(340,54)" filter="url(#glow)">
-            <!-- face -->
-            <rect x="0" y="0" width="120" height="110" rx="28" fill="#fff" stroke="#222" stroke-width="4"/>
-            <!-- ears -->
-            <path d="M14 6 l18 -16 l18 16" fill="#fff" stroke="#222" stroke-width="4"/>
-            <path d="M70 6 l18 -16 l18 16" fill="#fff" stroke="#222" stroke-width="4"/>
-            <!-- bow -->
-            <circle cx="112" cy="-4" r="16" fill="#ff5da2" stroke="#222" stroke-width="4"/>
-            <circle cx="96" cy="6" r="12" fill="#ff82bb" stroke="#222" stroke-width="4"/>
-            <!-- eyes -->
-            <circle cx="40" cy="44" r="6" fill="#222"/>
-            <circle cx="80" cy="44" r="6" fill="#222"/>
-            <!-- nose -->
-            <ellipse cx="60" cy="58" rx="7" ry="5" fill="#ffb400"/>
-            <!-- whiskers -->
-            <line x1="-10" y1="40" x2="24" y2="40" stroke="#222" stroke-width="4"/>
-            <line x1="-10" y1="56" x2="24" y2="56" stroke="#222" stroke-width="4"/>
-            <line x1="96" y1="40" x2="130" y2="40" stroke="#222" stroke-width="4"/>
-            <line x1="96" y1="56" x2="130" y2="56" stroke="#222" stroke-width="4"/>
-            <!-- tiny smile -->
-            <path d="M48 74 q12 10 24 0" stroke="#222" stroke-width="4" fill="none" stroke-linecap="round"/>
-          </g>
-
-          <!-- tiny hearts -->
-          <g fill="#ff7fb3" opacity=".8">
-            <path d="M270 36 c-6 -12 -26 -8 -26 6 0 12 12 16 26 30 14 -14 26 -18 26 -30 0 -14 -20 -18 -26 -6z"/>
-            <path d="M472 210 c-6 -12 -26 -8 -26 6 0 12 12 16 26 30 14 -14 26 -18 26 -30 0 -14 -20 -18 -26 -6z" transform="scale(.6) translate(330,220)"/>
-          </g>
-        </svg>
-
-        <div class="subtitle">Batman 🦇 + Kitty 🐱 forever</div>
-        <div class="note">Thank you for reading, Saloni. If you can, forgive me. — Yours</div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<script>
-  const screens = ["scr1","scr2","scr3","scr4","scr5","scr6"];
-  function go(id){
-    screens.forEach(s=>document.getElementById(s).classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-
-  /* Floating background hearts for intro */
-  const introHearts = document.getElementById('heartsIntro');
-  for(let i=0;i<28;i++){
-    const span=document.createElement('span');
-    span.textContent = ["💖","💗","💞","💕"][Math.floor(Math.random()*4)];
-    span.style.left = Math.random()*100 + "%";
-    span.style.top = (-10 - Math.random()*90) + "vh";
-    span.style.animationDuration = (8 + Math.random()*6) + "s";
-    span.style.fontSize = (14 + Math.random()*18) + "px";
-    introHearts.appendChild(span);
-  }
-
-  /* Typewriter letter */
-  const letterLines = [
-    "I'm sorry for the silent hours,",
-    "for the moments I let you down—",
-    "regret keeps tapping softly, love,",
-    "in every lost and lonely sound.",
-    "",
-    "I promise I will mend with care",
-    "the tender things I broke;",
-    "I'll learn your heart, and hold it right,",
-    "in every word I spoke.",
-    "",
-    "To choose you in the crowded room,",
-    "to show up, come what may—",
-    "please forgive my thoughtless errors,",
-    "and help me find a brighter day.",
-    "",
-    "— for Saloni 💗"
-  ];
-  let line=0, char=0, typing=false;
-  function startType(){
-    if(typing) return; typing=true;
-    const box=document.getElementById('typebox');
-    const cursor=document.getElementById('cursor');
-    box.textContent=""; line=0; char=0;
-
-    function step(){
-      if(line>=letterLines.length){
-        cursor.style.display="none";
-        document.getElementById('nextFromLetter').disabled=false;
-        return;
-      }
-      const current = letterLines[line];
-      if(char <= current.length){
-        box.textContent += current.slice(0,char) + (char===current.length ? "\n" : "");
-        char++;
-        setTimeout(step, 28); // typing speed
-      }else{
-        line++; char=0;
-        setTimeout(step, 220); // pause between lines
-      }
-    }
-    step();
-  }
-
-  /* Game */
-  let caught=0, need=7, spawned=0, maxHearts=18, started=false;
-  function startGame(){
-    go('scr5');
-    const box=document.getElementById('game');
-    const bar=document.getElementById('barFill');
-    const score=document.getElementById('score');
-    const next=document.getElementById('nextBtn');
-    // reset
-    box.innerHTML=""; caught=0; spawned=0; started=false;
-    bar.style.width="0%"; score.textContent="0"; next.disabled=true;
-
-    function spawn(){
-      if(spawned>=maxHearts) return;
-      spawned++;
-      const h=document.createElement('div');
-      h.className='heart';
-      h.textContent = ['💖','💗','💕','💞'][Math.floor(Math.random()*4)];
-      const x = Math.random()*(box.clientWidth-32);
-      const y = Math.random()*(box.clientHeight-42);
-      h.style.left = x+'px'; h.style.top = y+'px';
-      h.style.animationDelay = (Math.random()*0.7)+'s';
-      h.onclick = ()=>{
-        if(h.dataset.hit) return;
-        h.dataset.hit=1; h.style.transform='scale(0.2)'; h.style.opacity='.25';
-        caught++; score.textContent=caught;
-        bar.style.width = Math.min(caught/need*100,100)+'%';
-        if(caught>=need){ next.disabled=false; next.style.background='linear-gradient(135deg,#28c76f,#67e5a3)'; }
-      };
-      box.appendChild(h);
-      setTimeout(()=>{ if(!h.dataset.hit) h.remove(); }, 4200);
+  <script>
+    function next(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('show'));
+      document.getElementById(id).classList.add('show');
     }
 
-    const timer = setInterval(()=>{
-      spawn();
-      if(spawned>=maxHearts) clearInterval(timer);
-    }, 420); // wave spawn
-  }
-</script>
+    // Hearts game
+    const game = document.getElementById('game');
+    setInterval(() => {
+      if (!game.classList.contains('show')) return;
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (20 + Math.random()*20) + 'px';
+      heart.style.animationDuration = (3 + Math.random()*2) + 's';
+      game.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 500);
+  </script>
+
 </body>
 </html>
